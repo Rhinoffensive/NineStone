@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7392688937239938333}
   - component: {fileID: 8651484197693299337}
   - component: {fileID: 459910956089906409}
-  - component: {fileID: 1823588819183173398}
+  - component: {fileID: 6736171766507196323}
   m_Layer: 0
   m_Name: PieceWhite
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4074343695211972470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.64029, y: 0.64029, z: 0.64029}
+  m_LocalScale: {x: 0.64029, y: 0.64029, z: 1}
   m_Children:
   - {fileID: 8411155581467018528}
   m_Father: {fileID: 0}
@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bf982f5a5021c4da969505be63a810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: 0
   highLight: {fileID: 6179200463122836037}
---- !u!58 &1823588819183173398
+--- !u!58 &6736171766507196323
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +114,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
 --- !u!1 &6179200463122836037
 GameObject:
   m_ObjectHideFlags: 0
