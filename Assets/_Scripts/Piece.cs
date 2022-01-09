@@ -29,7 +29,7 @@ public class Piece : MonoBehaviour
 
         gridManager =  FindObjectOfType<GridManager>();
         
-
+        
 
     }
 
@@ -44,6 +44,7 @@ public class Piece : MonoBehaviour
         _previousLocation = gameObject.transform.position;
         _dragging = true;
         ValidMoves();
+      
     }
 
     private void OnMouseUp() {
@@ -62,7 +63,7 @@ public class Piece : MonoBehaviour
     void ValidMoves(){
         var tiles = gridManager.gameObject.GetComponentsInChildren<Tile>();
         foreach(Tile tile in tiles){
-            print(tile.name);
+            tile.LitTile();
         }
     }
 

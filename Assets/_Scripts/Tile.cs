@@ -28,13 +28,13 @@ public class Tile : MonoBehaviour
        _highlight.SetActive(false);
    }
 
-   private void OnMouseEnter() {
-       LitTile();
-   }
+//    private void OnMouseEnter() {
+//        LitTile();
+//    }
 
-   private void OnMouseExit() {
-       UnLitTile();
-   }
+//    private void OnMouseExit() {
+//        UnLitTile();
+//    }
 
 
    private void Start() {

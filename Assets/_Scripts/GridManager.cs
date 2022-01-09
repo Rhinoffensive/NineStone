@@ -29,15 +29,15 @@ public class GridManager : MonoBehaviour
 
     private void FixedUpdate()
     {      
-        foreach(Piece piece in _pieces){
-            var piece_pos = piece.transform.position;  
+        // foreach(Piece piece in _pieces){
+        //     var piece_pos = piece.transform.position;  
            
-            piece.transform.position = new Vector3(Mathf.RoundToInt(piece_pos.x),Mathf.RoundToInt(piece_pos.y));
-            var tile = GetTileAtPositon(new Vector2(Mathf.RoundToInt(piece_pos.x),Mathf.RoundToInt(piece_pos.y)));
-            if(tile!=null)
-                piece.transform.SetParent(tile.transform);
+        //     piece.transform.position = new Vector3(Mathf.RoundToInt(piece_pos.x),Mathf.RoundToInt(piece_pos.y));
+        //     var tile = GetTileAtPositon(new Vector2(Mathf.RoundToInt(piece_pos.x),Mathf.RoundToInt(piece_pos.y)));
+        //     if(tile!=null)
+        //         piece.transform.SetParent(tile.transform);
          
-        }
+        // }
     }
 
 
