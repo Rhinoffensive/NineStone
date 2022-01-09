@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9139066ce5ec5f248b04b7bf78e4fd7f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _tilePrefab: {fileID: 3210712742414540849, guid: c0e06600d57a8304ebf2578c0fec136d, type: 3}
+  - _cam: {instanceID: 0}
+  - white_piece: {fileID: -653965574024065028, guid: 15766f5fd9cb01143a73839a185f1bec, type: 3}
+  - black_piece: {fileID: 8094242176674439362, guid: 59e11a764f6e41e4aa4f6610d76e424a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
