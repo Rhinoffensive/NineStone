@@ -16,6 +16,7 @@ public class Piece : MonoBehaviour
     private GridManager gridManager;
     private bool _dragging;
     private SpriteRenderer _renderer;
+    private Vector2 _previousLocation;
 
     
     private void Start()
@@ -34,12 +35,15 @@ public class Piece : MonoBehaviour
 
     private void FixedUpdate() {
         if(!_dragging) return;
-        var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mousePosition;          
+        var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);       
+        transform.position = mousePosition;    
+              
     }
 
     private void OnMouseDown() {
+        _previousLocation = gameObject.transform.position;
         _dragging = true;
+        ValidMoves();
     }
 
     private void OnMouseUp() {
@@ -48,10 +52,18 @@ public class Piece : MonoBehaviour
         
         var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePosition;
+        if(mousePosition.x > gridManager._width -1 || mousePosition.x < 0 || mousePosition.y > gridManager._height-1 || mousePosition.y < 0 ){
+            transform.position = _previousLocation;
+        }  
 
-    
-        
+    }
 
+
+    void ValidMoves(){
+        var tiles = gridManager.gameObject.GetComponentsInChildren<Tile>();
+        foreach(Tile tile in tiles){
+            print(tile.name);
+        }
     }
 
     // private void OnCollisionEnter2D(Collision2D other) {

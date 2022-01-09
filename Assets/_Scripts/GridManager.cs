@@ -23,15 +23,20 @@ public class GridManager : MonoBehaviour
         GenerateGrid();
 
         GeneratePieces();
+
+        
     }
 
     private void FixedUpdate()
     {      
         foreach(Piece piece in _pieces){
-            var piece_pos = piece.transform.position;
+            var piece_pos = piece.transform.position;  
+           
             piece.transform.position = new Vector3(Mathf.RoundToInt(piece_pos.x),Mathf.RoundToInt(piece_pos.y));
             var tile = GetTileAtPositon(new Vector2(Mathf.RoundToInt(piece_pos.x),Mathf.RoundToInt(piece_pos.y)));
-            piece.transform.SetParent(tile.transform);
+            if(tile!=null)
+                piece.transform.SetParent(tile.transform);
+         
         }
     }
 
@@ -49,7 +54,7 @@ public class GridManager : MonoBehaviour
                 spawnedTile.name = $"Tile {x} {y}";
 
                 var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                spawnedTile.Init(isOffset);
+                spawnedTile.Init(isOffset, x, y);
 
                 _tiles[new Vector2(x, y)] = spawnedTile;
 
