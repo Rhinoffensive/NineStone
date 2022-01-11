@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bf982f5a5021c4da969505be63a810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 1
+  color: 2
   highLight: {fileID: 6179200463122836037}
 --- !u!58 &92099751295792665
 CircleCollider2D:

@@ -5,13 +5,14 @@ using UnityEngine;
 
 public enum PieceColor
 {
-    white,
-    black
+    white = 1,
+    black = 2
 }
 public class Piece : MonoBehaviour
 {
     public PieceColor color;
     [SerializeField] private GameObject highLight;
+    
 
     private GridManager gridManager;
     private bool _dragging;
