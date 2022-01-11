@@ -18,7 +18,7 @@ public class GridManager : MonoBehaviour
 
 
 
-    private Dictionary<Vector2, Tile> _tiles;
+    public Dictionary<Vector2, Tile> _tiles;
     private List<Piece> _pieces;
 
 
@@ -31,8 +31,24 @@ public class GridManager : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        foreach (var item in _tiles)
+        {
+            var piece = item.Value.GetComponentInChildren<Piece>();
+            if (piece == null)
+            {
+                grid[item.Value.row, item.Value.col, 0] = 0;
+            }
+            else if (piece.color == PieceColor.white)
+            {
+                grid[item.Value.row, item.Value.col, 0] = 1;
+            }
+            else
+            {
+                grid[item.Value.row, item.Value.col, 0] = 2;
+            }
+        }
         foreach (Piece piece in _pieces)
         {
             var piece_pos = piece.transform.position;
@@ -81,6 +97,7 @@ public class GridManager : MonoBehaviour
         }
 
         // 2-length moves
+        JumpMove(row, col, moves);
 
         return moves;
 
@@ -131,8 +148,8 @@ public class GridManager : MonoBehaviour
             var to = (row * 10) + (col - 2);
             if (!moves.Contains(to))
             {
-                moves.Add((row * 10) + (col - 1));
-                JumpMove(row, col-2,moves);
+                moves.Add((row * 10) + (col - 2));
+                JumpMove(row, col - 2, moves);
             }
         }
 
@@ -144,6 +161,7 @@ public class GridManager : MonoBehaviour
 
     void GenerateGrid()
     {
+
         _tiles = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < _width; x++)
         {
@@ -165,7 +183,7 @@ public class GridManager : MonoBehaviour
 
     void GeneratePieces()
     {
-
+        grid = new int[8, 8, 1];
         _pieces = new List<Piece>();
         for (int x = 0; x < 3; x++)
         {
@@ -175,6 +193,7 @@ public class GridManager : MonoBehaviour
                 var piece = Instantiate(white_piece, new Vector3(x, y), Quaternion.identity);
                 piece.transform.SetParent(tile.transform);
                 _pieces.Add(piece);
+                grid[x, y, 0] = 1;
             }
         }
 
@@ -186,6 +205,7 @@ public class GridManager : MonoBehaviour
                 var piece = Instantiate(black_piece, new Vector3(x, y), Quaternion.identity);
                 piece.transform.SetParent(tile.transform);
                 _pieces.Add(piece);
+                grid[x, y, 0] = 2;
             }
         }
 

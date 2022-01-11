@@ -12,14 +12,16 @@ public class Piece : MonoBehaviour
 {
     public PieceColor color;
     [SerializeField] private GameObject highLight;
-    
+
 
     private GridManager gridManager;
     private bool _dragging;
     private SpriteRenderer _renderer;
     private Vector2 _previousLocation;
 
-    
+    private int _x, _y;
+
+
     private void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
@@ -28,44 +30,63 @@ public class Piece : MonoBehaviour
         else
             _renderer.color = Color.black;
 
-        gridManager =  FindObjectOfType<GridManager>();
-        
-
+        gridManager = FindObjectOfType<GridManager>();
 
     }
 
-    private void FixedUpdate() {
-        if(!_dragging) return;
-        var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);       
-        transform.position = mousePosition;    
-              
+    private void Update()
+    {
+        var parrentTile = GetComponentInParent<Tile>();
+        _x = parrentTile.row;
+        _y = parrentTile.col;
     }
 
-    private void OnMouseDown() {
-        _previousLocation = gameObject.transform.position;
-        _dragging = true;
-        ValidMoves();
-    }
-
-    private void OnMouseUp() {
-        _dragging = false;
-        
-        
+    private void FixedUpdate()
+    {
+        if (!_dragging) return;
         var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePosition;
-        if(mousePosition.x > gridManager._width -1 || mousePosition.x < 0 || mousePosition.y > gridManager._height-1 || mousePosition.y < 0 ){
-            transform.position = _previousLocation;
-        }  
 
     }
 
-
-    void ValidMoves(){
-        var tiles = gridManager.gameObject.GetComponentsInChildren<Tile>();
-        foreach(Tile tile in tiles){
-            print(tile.name);
+    private void OnMouseDown()
+    {
+        _previousLocation = gameObject.transform.position;
+        _dragging = true;
+        var validMoves = gridManager.GetPieceMoves(_x, _y);
+        foreach (int mv in validMoves)
+        {
+            var tile = gridManager.GetTileAtPositon(new Vector2(mv % 10, mv / 10));
+            tile.LitTile();
         }
     }
+
+    private void OnMouseUp()
+    {
+        _dragging = false;
+
+
+        var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = mousePosition;
+        if (mousePosition.x > gridManager._width - 1 || mousePosition.x < 0 || mousePosition.y > gridManager._height - 1 || mousePosition.y < 0)
+        {
+            transform.position = _previousLocation;
+        }
+
+        foreach (var tile in gridManager._tiles)
+        {
+            tile.Value.UnLitTile();
+        }
+
+    }
+
+
+    // void ValidMoves(){
+    //     var tiles = gridManager.gameObject.GetComponentsInChildren<Tile>();
+    //     foreach(Tile tile in tiles){
+    //         print(tile.name);
+    //     }
+    // }
 
     // private void OnCollisionEnter2D(Collision2D other) {
     //     if(other.gameObject.tag == "Tile")
