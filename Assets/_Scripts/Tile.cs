@@ -29,11 +29,11 @@ public class Tile : MonoBehaviour
    }
 
    private void OnMouseEnter() {
-       LitTile();
+       //LitTile();
    }
 
    private void OnMouseExit() {
-       UnLitTile();
+       //UnLitTile();
    }
 
 

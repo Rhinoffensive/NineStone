@@ -54,6 +54,7 @@ public class Piece : MonoBehaviour
         _previousLocation = gameObject.transform.position;
         _dragging = true;
         var validMoves = gridManager.GetPieceMoves(_x, _y);
+        transform.localScale *= 1.1f;
         foreach (int mv in validMoves)
         {
             var tile = gridManager.GetTileAtPositon(new Vector2(mv % 10, mv / 10));
@@ -68,6 +69,7 @@ public class Piece : MonoBehaviour
 
         var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePosition;
+        transform.localScale *= 0.91f;
         if (mousePosition.x > gridManager._width - 1 || mousePosition.x < 0 || mousePosition.y > gridManager._height - 1 || mousePosition.y < 0)
         {
             transform.position = _previousLocation;
