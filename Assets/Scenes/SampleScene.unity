@@ -240,7 +240,7 @@ MonoBehaviour:
   _tilePrefab: {fileID: 3210712742414540849, guid: c0e06600d57a8304ebf2578c0fec136d, type: 3}
   _cam: {fileID: 519420032}
   white_piece: {fileID: 459910956089906409, guid: 15766f5fd9cb01143a73839a185f1bec, type: 3}
-  black_piece: {fileID: 8094242176674439362, guid: 59e11a764f6e41e4aa4f6610d76e424a, type: 3}
+  black_piece: {fileID: 459910956089906409, guid: c703dff990697164e9f07920c2009380, type: 3}
 --- !u!4 &1750871337
 Transform:
   m_ObjectHideFlags: 0
