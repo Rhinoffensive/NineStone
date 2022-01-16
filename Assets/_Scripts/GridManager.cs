@@ -33,6 +33,13 @@ public class GridManager : MonoBehaviour
 
     private void Update()
     {
+        //UpdateBoard();
+        //UpdatePiece();
+        
+    }
+
+    public void UpdateBoard()
+    {
         foreach (var item in _tiles)
         {
             var piece = item.Value.GetComponentInChildren<Piece>();
@@ -49,6 +56,10 @@ public class GridManager : MonoBehaviour
                 grid[item.Value.row, item.Value.col, 0] = 2;
             }
         }
+    }
+
+    public void UpdatePiece()
+    {
         foreach (Piece piece in _pieces)
         {
             var piece_pos = piece.transform.position;

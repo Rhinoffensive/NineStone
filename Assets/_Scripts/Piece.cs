@@ -18,6 +18,7 @@ public class Piece : MonoBehaviour
     private bool _dragging;
     private SpriteRenderer _renderer;
     private Vector2 _previousLocation;
+    private List<int> possibleLocations;
 
     private int _x, _y;
 
@@ -39,6 +40,7 @@ public class Piece : MonoBehaviour
         var parrentTile = GetComponentInParent<Tile>();
         _x = parrentTile.row;
         _y = parrentTile.col;
+        possibleLocations = gridManager.GetPieceMoves(_x, _y);
     }
 
     private void FixedUpdate()
@@ -53,7 +55,7 @@ public class Piece : MonoBehaviour
     {
         _previousLocation = gameObject.transform.position;
         _dragging = true;
-        var validMoves = gridManager.GetPieceMoves(_x, _y);
+        var validMoves = possibleLocations;
         transform.localScale *= 1.1f;
         foreach (int mv in validMoves)
         {
@@ -64,22 +66,41 @@ public class Piece : MonoBehaviour
 
     private void OnMouseUp()
     {
+        
+
         _dragging = false;
 
 
         var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePosition;
         transform.localScale *= 0.91f;
-        if (mousePosition.x > gridManager._width - 1 || mousePosition.x < 0 || mousePosition.y > gridManager._height - 1 || mousePosition.y < 0)
+        if (mousePosition.x > gridManager._width - 1 || mousePosition.x < 0 || mousePosition.y > gridManager._height - 1 || mousePosition.y < 0 )
         {
             transform.position = _previousLocation;
         }
+
+        bool isInPosible = false;
+        foreach(int posVal in possibleLocations){
+            int x,y = 0;
+            x = posVal%10;
+            y = posVal/10;
+            isInPosible |= Mathf.RoundToInt(mousePosition.x) == x && Mathf.RoundToInt(mousePosition.y) == y;
+        }
+        if(!isInPosible){
+            transform.position = _previousLocation;
+        }
+
+        
 
         foreach (var tile in gridManager._tiles)
         {
             tile.Value.UnLitTile();
         }
 
+        gridManager.UpdateBoard();
+        gridManager.UpdatePiece();
+        
+        
     }
 
 
