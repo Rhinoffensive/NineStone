@@ -32,29 +32,40 @@ public class Piece : MonoBehaviour
             _renderer.color = Color.black;
 
         gridManager = FindObjectOfType<GridManager>();
+        
 
     }
 
     private void Update()
     {
+      if(!_dragging) return;
+      Grab();
+      
+    }
+
+    private void UpdatePosition()
+    {
         var parrentTile = GetComponentInParent<Tile>();
         _x = parrentTile.row;
         _y = parrentTile.col;
-        possibleLocations = gridManager.GetPieceMoves(_x, _y);
+        
     }
 
-    private void FixedUpdate()
+ 
+
+    private void Grab()
     {
-        if (!_dragging) return;
         var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePosition;
-
     }
 
     private void OnMouseDown()
     {
         _previousLocation = gameObject.transform.position;
         _dragging = true;
+        
+       
+        possibleLocations = gridManager.GetPieceMoves(_x, _y);
         var validMoves = possibleLocations;
         transform.localScale *= 1.1f;
         foreach (int mv in validMoves)
@@ -99,6 +110,8 @@ public class Piece : MonoBehaviour
 
         gridManager.UpdateBoard();
         gridManager.UpdatePiece();
+        UpdatePosition();
+        //gridManager.EvaluateBoard();
         
         
     }

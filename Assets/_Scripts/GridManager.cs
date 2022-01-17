@@ -28,6 +28,7 @@ public class GridManager : MonoBehaviour
 
         GeneratePieces();
 
+       
 
     }
 
@@ -35,7 +36,8 @@ public class GridManager : MonoBehaviour
     {
         //UpdateBoard();
         //UpdatePiece();
-        
+       
+
     }
 
     public void UpdateBoard()
@@ -56,6 +58,7 @@ public class GridManager : MonoBehaviour
                 grid[item.Value.row, item.Value.col, 0] = 2;
             }
         }
+       
     }
 
     public void UpdatePiece()
@@ -70,6 +73,32 @@ public class GridManager : MonoBehaviour
                 piece.transform.SetParent(tile.transform);
 
         }
+        
+    }
+
+
+    public int EvaluateBoard()
+    {
+        int evalScore = 0;
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                var val = grid[i, j, 0];
+                if (val == (int)PieceColor.white)
+                {
+                    evalScore -= ((7 - i) + (7 - j));
+                }
+                else if (val == (int)PieceColor.black)
+                {
+                    evalScore += i + j;
+                }
+            }
+        }
+
+        print(evalScore);
+        return evalScore;
+
     }
 
     public List<int> GetPieceMoves(int row, int col)
