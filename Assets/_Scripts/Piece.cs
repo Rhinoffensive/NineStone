@@ -21,11 +21,13 @@ public class Piece : MonoBehaviour
     private List<int> possibleLocations;
 
     private int _x, _y;
+    private CircleCollider2D colider;
 
 
     private void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
+        colider = GetComponent<CircleCollider2D>();
         if (color == PieceColor.white)
             _renderer.color = Color.white;
         else
@@ -39,6 +41,11 @@ public class Piece : MonoBehaviour
 
     private void Update()
     {
+       if((gridManager.isWhiteTurn && PieceColor.black == color) || (!gridManager.isWhiteTurn && PieceColor.white == color) ){
+           colider.enabled = false;
+       }else{
+           colider.enabled = true;
+       }
       if(!_dragging) return;
       Grab();
       
@@ -62,6 +69,7 @@ public class Piece : MonoBehaviour
 
     private void OnMouseDown()
     {
+
         _previousLocation = gameObject.transform.position;
         _dragging = true;
         

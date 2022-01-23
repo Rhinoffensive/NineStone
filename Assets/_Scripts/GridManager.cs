@@ -22,6 +22,8 @@ public class GridManager : MonoBehaviour
     private List<Piece> _pieces;
 
     private bool update_board;
+
+    public bool isWhiteTurn = true;
     
 
 
