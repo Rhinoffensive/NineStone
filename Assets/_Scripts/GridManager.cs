@@ -21,6 +21,9 @@ public class GridManager : MonoBehaviour
     public Dictionary<Vector2, Tile> _tiles;
     private List<Piece> _pieces;
 
+    private bool update_board;
+    
+
 
     private void Start()
     {
@@ -34,8 +37,8 @@ public class GridManager : MonoBehaviour
 
     private void Update()
     {
-        //UpdateBoard();
-        //UpdatePiece();
+        UpdateBoard();
+        UpdatePiece();
        
 
     }

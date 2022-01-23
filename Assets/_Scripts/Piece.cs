@@ -32,6 +32,7 @@ public class Piece : MonoBehaviour
             _renderer.color = Color.black;
 
         gridManager = FindObjectOfType<GridManager>();
+        UpdatePosition();
         
 
     }
@@ -111,35 +112,10 @@ public class Piece : MonoBehaviour
         gridManager.UpdateBoard();
         gridManager.UpdatePiece();
         UpdatePosition();
-        //gridManager.EvaluateBoard();
+        gridManager.EvaluateBoard();
         
         
     }
-
-
-    // void ValidMoves(){
-    //     var tiles = gridManager.gameObject.GetComponentsInChildren<Tile>();
-    //     foreach(Tile tile in tiles){
-    //         print(tile.name);
-    //     }
-    // }
-
-    // private void OnCollisionEnter2D(Collision2D other) {
-    //     if(other.gameObject.tag == "Tile")
-    //     {
-    //         print(other.gameObject.name);
-    //     }
-    // }
-    // private void OnMouseEnter()
-    // {
-    //     highLight.SetActive(true);
-    // }
-
-    // private void OnMouseExit()
-    // {
-    //     highLight.SetActive(false);
-    // }
-
 
 
 
